@@ -1,0 +1,883 @@
+@use "sass:math";
+
+$block: 133px;
+$spacing: 20px;
+
+.game {
+  width: 11 * $block + 10 * $spacing + 48px;
+
+  .list {
+    grid-template-columns: repeat(11, 133px);
+    grid-gap: 20px;
+    display: grid;
+    grid-auto-flow: dense;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    .area {
+      grid-row-start: span 9;
+      grid-row-end: 1;
+      grid-column-start: span 7;
+      grid-column-end: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      >div {
+        margin-bottom: 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .area__container {
+        margin-top: 13px;
+        margin-right: 13px;
+        height: 617px;
+
+        &__main {
+          height: 100%;
+          overflow: hidden;
+          display: flex;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          position: relative;
+          margin-bottom: 20px;
+
+          .top {
+            border-radius: 10px 10px 0 0;
+            width: 100%;
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            min-height: 0;
+            position: relative;
+
+            &__shading {
+              border-radius: inherit;
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 1;
+              background-color: #6500B6;
+              display: flex;
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              -webkit-align-items: center;
+              -webkit-box-align: center;
+              -ms-flex-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              -webkit-justify-content: center;
+              -ms-flex-pack: center;
+              justify-content: center;
+              -webkit-flex-direction: column;
+              -ms-flex-direction: column;
+              flex-direction: column;
+              overflow: hidden;
+
+              .btn {
+                width: 184px;
+                height: 50px;
+
+                span {
+                  font-size: 20px;
+                  line-height: 21px;
+                  font-family: "RussoOne";
+                  text-align: center;
+                  margin-right: 15px;
+                }
+
+                img {
+                  width: 20px;
+                  height: 20px;
+                  object-fit: contain;
+                }
+
+                .pc {
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  display: -webkit-box;
+                  display: -webkit-flex;
+                  display: -ms-flexbox;
+                  -webkit-align-items: center;
+                  -webkit-box-align: center;
+                  -ms-flex-align: center;
+                  align-items: center;
+                  -webkit-box-pack: center;
+                  -webkit-justify-content: center;
+                  -ms-flex-pack: center;
+                  justify-content: center;
+                }
+
+                &.btn-h5 {
+                  display: none;
+                }
+
+              }
+
+              .loading {
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                border: 0.25rem solid rgba(255, 255, 255, 0.2);
+                border-top-color: #fff;
+                animation: loading 0.6s infinite linear;
+                -webkit-animation: loading 0.6s infinite linear;
+              }
+            }
+
+            .game-element {
+              border-radius: inherit;
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .bottom {
+            height: 70px;
+            border-radius: 0 0 12px 12px;
+            padding: 0 20px 0 10px;
+            -webkit-flex-shrink: 0;
+            flex-shrink: 0;
+            width: 100%;
+            display: flex;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            -webkit-align-items: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: #891FDD;
+
+            &__img {
+              -webkit-flex-shrink: 0;
+              flex-shrink: 0;
+              width: 50px;
+              height: 50px;
+              border-radius: 6px;
+              background-color: #1d1242;
+              object-fit: cover;
+            }
+
+            &__title {
+              padding-left: 13px;
+              font-family: "RussoOne";
+              font-size: 26px;
+              line-height: 1;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+
+            &__love {
+              margin-left: auto;
+              background-image: url("/img/game/love.svg");
+              background-repeat: no-repeat;
+              background-size: 22px 18px;
+              background-position: center;
+
+              &.active.bottom__love {
+                background-image: url("/img/game/loveActive.svg");
+                background-repeat: no-repeat;
+                background-size: 22px 18px;
+                background-position: center;
+              }
+            }
+
+            &__full {
+              .fullScreen {
+                width: 18px;
+                height: 18px;
+              }
+
+              .smallScreen {
+                width: 18px;
+                height: 18px;
+              }
+            }
+
+            &__btn {
+              -webkit-flex-shrink: 0;
+              flex-shrink: 0;
+              width: 60px;
+              height: 36px;
+              border-radius: 36px;
+              background-color: #6500B6;
+
+              &:last-child {
+                margin-left: 10px;
+              }
+            }
+          }
+
+          .recommend {
+            display: none;
+          }
+
+          .return {
+            display: none;
+          }
+
+          &.active {
+            --width: 100vw;
+            --height: 100vh;
+            --minHeight: 100vh;
+            height: var(--height, 100%);
+            width: var(--width, 100%);
+            min-height: var(--minHeight, 100vh);
+            position: fixed !important;
+            z-index: 100002 !important;
+            top: 0 !important;
+            left: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            background: rgb(0, 0, 0) !important;
+            -webkit-animation: fade_enter 0.6s ease;
+            animation: fade_enter 0.6s ease;
+
+            .top {
+              border-radius: 0;
+            }
+
+            .bottom {
+              border-radius: 0;
+            }
+          }
+        }
+
+      }
+
+      &__info {
+        margin-top: 13px;
+        margin-right: 13px;
+        height: auto;
+        padding: 24px;
+
+        .top {
+          width: 100%;
+          min-height: 38px;
+          display: flex;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          -webkit-align-items: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-flex-wrap: wrap;
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+
+          .title {
+            font-family: "RussoOne";
+            font-size: 24px;
+            line-height: 24px;
+            margin-right: 24px;
+            margin-bottom: 5px;
+          }
+
+          .label {
+            -webkit-flex-shrink: 0;
+            flex-shrink: 0;
+            margin: 0 10px 5px 0;
+            line-height: 34px;
+            background: #FF05B0;
+            border-radius: 48px;
+            font-family: "WorkSans-Medium";
+            font-size: 12px;
+            padding: 0 12px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+
+        .explain {
+          margin-top: 10px;
+          font-size: 16px;
+          line-height: 24px;
+          font-family: "WorkSans-Regular";
+          height: 50px;
+          overflow-y: auto;
+        }
+
+        .category {
+          margin-top: 8px;
+          font-family: "WorkSans-Bold";
+          font-size: 14px;
+          line-height: 20px;
+
+          span {
+            color: #FF05B0;
+          }
+        }
+      }
+
+      .midAd1 {
+        height: 177px;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .midAd2 {
+        width: 100%;
+        height: 264px;
+      }
+
+    }
+  }
+
+
+  @-webkit-keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@media (max-width: (11 * $block + 10 * $spacing + 50px)) {
+  .game {
+    width: 10 * $block + 9 * $spacing + 48px;
+
+    .list {
+      grid-template-columns: repeat(10, 133px);
+    }
+  }
+}
+
+@media (max-width: (10 * $block + 9 * $spacing + 50px)) {
+  .game {
+    width: 9 * $block + 8 * $spacing + 48px;
+
+    .list {
+      grid-template-columns: repeat(9, 133px);
+    }
+  }
+}
+
+@media (max-width: (9 * $block + 8 * $spacing + 50px)) {
+  .game {
+    width: 8 * $block + 7 * $spacing + 48px;
+
+    .list {
+      grid-template-columns: repeat(8, 133px);
+
+      .area {
+        grid-column-end: 9;
+      }
+    }
+  }
+}
+
+@media (max-width: (8 * $block + 7 * $spacing + 50px)) {
+  .game {
+    width: 7 * $block + 6 * $spacing + 48px;
+
+    .list {
+      grid-template-columns: repeat(7, 133px);
+
+      .area {
+        grid-column-end: 8;
+      }
+    }
+  }
+}
+
+@media (max-width: (7 * $block + 6 * $spacing + 50px)) {
+  .game {
+    width: 6 * $block + 5 * $spacing + 48px;
+
+    .list {
+      grid-template-columns: repeat(6, 133px);
+
+      .area {
+        grid-column-start: span 6;
+        grid-column-end: 7;
+      }
+    }
+  }
+}
+
+@media (max-width: (6 * $block + 5 * $spacing + 50px)) {
+  .game {
+    width: 5 * $block + 4 * $spacing + 48px;
+
+    .list {
+      grid-template-columns: repeat(5, 133px);
+
+      .area {
+        grid-column-start: span 5;
+        grid-column-end: 6;
+      }
+    }
+  }
+}
+
+@media (max-width: (5 * $block + 4 * $spacing + 50px)) {
+  .game {
+    width: 4 * $block + 3 * $spacing + 48px;
+
+    .list {
+      grid-template-columns: repeat(4, 133px);
+
+      .area {
+        grid-column-start: span 4;
+        grid-column-end: 5;
+      }
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+
+  .game {
+    width: 100%;
+
+    .list {
+      grid-template-columns: repeat(3, 98 * $pr);
+      grid-gap: 14 * $pr;
+
+      .area {
+        width: 343 * $pr;
+        margin-left: -10 * $pr;
+        grid-column-start: span 3;
+        grid-column-end: 4;
+
+        >div {
+          margin-bottom: 20 * $pr;
+
+        }
+
+        .area__container {
+          margin-top: 8 * $pr;
+          margin-right: 8 * $pr;
+          height: 229 * $pr;
+
+          &__main {
+            margin-bottom: 0;
+
+            .top {
+              border-radius: 15 * $pr 15 * $pr 0 0;
+
+              &__shading {
+
+                .btn {
+                  width: 122 * $pr;
+                  height: 29 * $pr;
+
+                  span {
+                    font-size: 12 * $pr;
+                    line-height: 12 * $pr;
+                    margin-right: 10 * $pr;
+                  }
+
+                  img {
+                    width: 16 * $pr;
+                    height: 16 * $pr;
+                  }
+
+                  &.btn-pc {
+                    display: none;
+                  }
+
+                  &.btn-h5 {
+                    display: block;
+                  }
+
+                  .h5 {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    -webkit-align-items: center;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    -webkit-justify-content: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                  }
+                }
+
+              }
+
+            }
+
+            .bottom {
+              height: 41 * $pr;
+              border-radius: 0 0 13 * $pr 13 * $pr;
+              padding: 0 8 * $pr;
+
+              &__img {
+                width: 28 * $pr;
+                height: 28 * $pr;
+                border-radius: 6 * $pr;
+              }
+
+              &__title {
+                padding-left: 7 * $pr;
+                font-size: 12 * $pr;
+              }
+
+              &__love {
+                margin-left: auto;
+                background-image: url("/img/game/love.svg");
+                background-repeat: no-repeat;
+                background-size: 18 * $pr 18 * $pr;
+                background-position: center;
+
+                &.active.bottom__love {
+                  background-image: url("/img/game/loveActive.svg");
+                  background-repeat: no-repeat;
+                  background-size: 18 * $pr 18 * $pr;
+                  background-position: center;
+                }
+              }
+
+              &__full {
+                .fullScreen {
+                  width: 13 * $pr;
+                  height: 13 * $pr;
+                }
+
+                .smallScreen {
+                  width: 13 * $pr;
+                  height: 13 * $pr;
+                }
+              }
+
+              &__btn {
+                width: 40 * $pr;
+                height: 24 * $pr;
+                border-radius: 20 * $pr;
+
+                &:last-child {
+                  margin-left: 8 * $pr;
+                }
+              }
+            }
+
+            .return {
+              position: absolute;
+              left: 0;
+              top: 30 * $pr;
+              width: 32 * $pr;
+              height: 24 * $pr;
+              border-radius: 0 12 * $pr 12 * $pr 0;
+              padding-right: 5 * $pr;
+              background: #ffff00;
+              display: flex;
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              -webkit-align-items: center;
+              -webkit-box-align: center;
+              -ms-flex-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              -webkit-justify-content: center;
+              -ms-flex-pack: center;
+              justify-content: center;
+              cursor: pointer;
+
+              img {
+                width: 14 * $pr;
+              }
+            }
+
+            .bottom {
+              height: 40 * $pr;
+              border-radius: 0 0 8 * $pr 8 * $pr;
+              padding: 0 8 * $pr 0 6 * $pr;
+
+              &__img {
+                width: 28 * $pr;
+                height: 28 * $pr;
+                border-radius: 6 * $pr;
+              }
+
+              &__title {
+                padding-left: 7 * $pr;
+                font-size: 12 * $pr;
+              }
+
+              &__love {
+                background-size: 14 * $pr 12 * $pr;
+                background-position: center;
+
+                &.active.bottom__love {
+                  background-size: 14 * $pr 12 * $pr;
+                  background-position: center;
+                }
+              }
+
+              &__full {
+                display: none;
+              }
+
+              &__btn {
+                width: 40 * $pr;
+                height: 24 * $pr;
+                border-radius: 24 * $pr;
+              }
+            }
+
+            &.active {
+              .bottom {
+                display: none;
+              }
+
+              .recommend {
+                -webkit-flex-shrink: 0;
+                flex-shrink: 0;
+                height: 100 * $pr;
+                width: 100%;
+                padding: 0 10 * $pr;
+                background-color: var(--box-color);
+                display: flex;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-scroll-snap-type: x mandatory;
+                -moz-scroll-snap-type: x mandatory;
+                -ms-scroll-snap-type: x mandatory;
+                scroll-snap-type: x mandatory;
+                -webkit-scroll-behavior: smooth;
+                -moz-scroll-behavior: smooth;
+                -ms-scroll-behavior: smooth;
+                scroll-behavior: smooth;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                  display: none;
+                  width: 0;
+                  height: 0;
+                }
+
+                &-item {
+                  width: 80 * $pr;
+                  height: 80 * $pr;
+                  -webkit-flex-shrink: 0;
+                  flex-shrink: 0;
+                  margin: 0 5 * $pr;
+                }
+              }
+            }
+          }
+
+        }
+
+        &__info {
+          margin-right: 8 * $pr;
+          margin-top: 8 * $pr;
+          padding: 15 * $pr 10 * $pr;
+
+          .top {
+            width: 100%;
+            min-height: 20 * $pr;
+
+            .title {
+              font-size: 14 * $pr;
+              line-height: 14 * $pr;
+              margin-right: 10 * $pr;
+            }
+
+            .label {
+              margin: 0 5 * $pr 5 * $pr 0;
+              line-height: 20 * $pr;
+              border-radius: 48 * $pr;
+              font-size: 12* $pr;
+              padding: 0 10 * $pr;
+
+              &:hover {
+                opacity: 1;
+              }
+            }
+          }
+
+          .explain {
+            margin-top: 8 * $pr;
+            font-size: 12 * $pr;
+            line-height: 18 * $pr;
+            height: 72 * $pr;
+          }
+
+          .category {
+            display: none;
+          }
+        }
+
+        .midAd1,
+        .midAd2 {
+          max-width: 100vw;
+          width: 100vw;
+          margin-left: -16 * $pr;
+          height: 332 * $pr;
+        }
+
+      }
+    }
+
+  }
+}
+
+@media screen and (orientation: landscape) {
+  $pr: math.div(1vh, 3.75);
+
+  :global(html.mobile) {
+    .game {
+      .area {
+        .area__container {
+          &__main {
+            .return {
+              position: absolute;
+              left: 0;
+              top: 30 * $pr;
+              width: 32 * $pr;
+              height: 24 * $pr;
+              border-radius: 0 12 * $pr 12 * $pr 0;
+              padding-right: 5 * $pr;
+              background: #ffff00;
+              display: flex;
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: -ms-flexbox;
+              -webkit-align-items: center;
+              -webkit-box-align: center;
+              -ms-flex-align: center;
+              align-items: center;
+              -webkit-box-pack: center;
+              -webkit-justify-content: center;
+              -ms-flex-pack: center;
+              justify-content: center;
+              cursor: pointer;
+
+              img {
+                width: 14 * $pr;
+              }
+            }
+
+            .bottom {
+              &__full {
+                display: none;
+              }
+            }
+
+            &.active {
+              -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+              flex-direction: row;
+
+              .top {
+                height: 100%;
+              }
+
+              .bottom {
+                display: none;
+              }
+
+              .recommend {
+                -webkit-flex-shrink: 0;
+                flex-shrink: 0;
+                height: 100%;
+                width: 100 * $pr;
+                padding: 10 * $pr 0;
+                background-color: var(--box-color);
+                display: flex;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                -webkit-align-items: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                -webkit-scroll-snap-type: y mandatory;
+                -moz-scroll-snap-type: y mandatory;
+                -ms-scroll-snap-type: y mandatory;
+                scroll-snap-type: y mandatory;
+                -webkit-scroll-behavior: smooth;
+                -moz-scroll-behavior: smooth;
+                -ms-scroll-behavior: smooth;
+                scroll-behavior: smooth;
+                overflow-x: hidden;
+                overflow-y: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                  display: none;
+                  width: 0;
+                  height: 0;
+                }
+
+                &-item {
+                  // -webkit-scroll-snap-align: start;
+                  // -moz-scroll-snap-align: start;
+                  // -ms-scroll-snap-align: start;
+                  // scroll-snap-align: start;
+                  width: 80 * $pr;
+                  height: 80 * $pr;
+                  -webkit-flex-shrink: 0;
+                  flex-shrink: 0;
+                  margin: 5 * $pr 0;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+}

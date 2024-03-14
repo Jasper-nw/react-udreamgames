@@ -1,0 +1,94 @@
+@use "sass:math";
+
+.classify {
+  width: 100%;
+  height: 110px;
+  border-radius: 10px;
+  border: 2px solid #000;
+  background: #FFF;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 4px;
+
+  .img {
+    display: block;
+    width: 98px;
+    height: 98px;
+    border-radius: inherit;
+    object-fit: cover;
+  }
+
+  &__span {
+    margin-left: 10px;
+    font-size: 17px;
+    line-height: 23px;
+    font-family: "RussoOne";
+    color: #000;
+    text-transform: uppercase;
+  }
+
+  &__img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  &:hover {
+    background: #6500B6;
+    padding: 0;
+
+    .img {
+      width: 106px;
+      height: 100%;
+    }
+
+    .classify__span {
+      color: #fff;
+    }
+  }
+
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+
+  .classify {
+    height: 70 * $pr;
+    border-radius: 10 * $pr;
+    border: 2 * $pr solid #000;
+    padding: 4 * $pr;
+
+    .img {
+      width: 58 * $pr;
+      height: 58 * $pr;
+    }
+
+    &__img {
+      width: 33 * $pr;
+      height: 21 * $pr;
+    }
+
+    &__span {
+      margin-left: 5 * $pr;
+      font-size: 12 * $pr;
+      line-height: 13 * $pr;
+    }
+
+    &:hover {
+      background: #FFF;
+      padding: 4 * $pr;
+
+      .img {
+        width: 58 * $pr;
+        height: 58 * $pr;
+      }
+
+      .classify__span {
+        color: #000;
+      }
+    }
+
+  }
+}

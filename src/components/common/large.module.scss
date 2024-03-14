@@ -1,0 +1,128 @@
+@use 'sass:math';
+
+.large {
+  width: 100%;
+  height: 286px;
+  border-radius: 12px;
+  position: relative;
+  grid-row-start: span 2;
+  grid-column-start: span 2;
+  display: block;
+  background-color: #fff;
+  border: 2px solid #000;
+  padding: 6px;
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+    -webkit-box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -webkit-transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  .img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    margin-right: 5px;
+    top: 0;
+    right: 0;
+    width: 145px;
+    height: 45px;
+    z-index: 6;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-right: 5px;
+      margin-top: 5px;
+
+      .name {
+        font-family: "RussoOne";
+        font-size: 18px;
+        line-height: 20px;
+        color: #000;
+      }
+
+      .total {
+        color: rgba(0, 0, 0, 0.60);
+        font-family: "WorkSans-Regular";
+        font-size: 15px;
+        line-height: 17px;
+      }
+    }
+  }
+
+  &:hover {
+    -webkit-transform: scale(1.02) translate(0, -10px);
+    transform: scale(1.02) translate(0, -10px);
+    -webkit-box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.6);
+    z-index: 7;
+  }
+
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+
+  .large {
+    height: 204 * $pr;
+    border-radius: 8 * $pr;
+    border: 1 * $pr solid #000;
+    padding: 5 * $pr;
+
+    &__info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      position: absolute;
+      margin-right: 1 * $pr;
+      top: 0;
+      right: 0;
+      width: 98 * $pr;
+      height: 40 * $pr;
+      z-index: 6;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-right: 2 * $pr;
+        margin-top: 0;
+
+        .name {
+          font-size: 14 * $pr;
+          line-height: 14 * $pr;
+        }
+
+        .total {
+          font-size: 12 * $pr;
+          line-height: 14 * $pr;
+        }
+      }
+
+      .cateBg {
+        width: 20 * $pr;
+        height: 20 * $pr;
+      }
+    }
+
+
+    &:hover {
+      -webkit-transform: scale(1) translate(0, 0);
+      transform: scale(1) translate(0, 0);
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+  }
+}

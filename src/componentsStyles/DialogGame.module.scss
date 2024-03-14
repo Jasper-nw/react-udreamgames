@@ -1,0 +1,167 @@
+@use "sass:math";
+
+.dialog {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__mask {
+    background-color: rgba(25, 20, 44, 0.80);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &__main {
+    z-index: 2;
+    width: 694px;
+    height: 370px;
+    border-radius: 16px;
+    padding-top: 34px;
+    border: 3px solid #000;
+    background: #6500B6;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .close {
+      width: 63px;
+      height: 63px;
+      background: url("/img/base/close.svg") no-repeat center center;
+      background-size: contain;
+      position: absolute;
+      right: -20px;
+      top: -23px;
+      cursor: pointer;
+    }
+
+    .p1 {
+      font-size: 32px;
+      line-height: 47px;
+      font-family: "RussoOne";
+      text-align: center;
+    }
+
+    .p2 {
+      font-size: 16px;
+      line-height: 26px;
+      font-family: "WorkSans-Medium";
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .list {
+      grid-gap: 20px;
+      display: grid;
+      grid-auto-flow: dense;
+      grid-template-columns: repeat(5, 106px);
+      justify-content: center;
+      margin-top: 26px;
+
+      >a {
+        height: 106px;
+
+        &:nth-child(n + 6) {
+          display: none;
+        }
+      }
+    }
+
+    .href {
+      margin: 39px auto 0;
+      width: 214px;
+      height: 54px;
+
+      .quick {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+          font-family: "RussoOne";
+          font-size: 20px;
+          line-height: 1;
+          margin-right: 15px;
+          color: #6500B6;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+
+  .dialog {
+    &__main {
+      position: absolute;
+      width: 100%;
+      height: 390 * $pr;
+      border-radius: 15 * $pr 15 * $pr 0 0;
+      padding-top: 35 * $pr;
+      left: 0;
+      top: auto;
+      bottom: 0;
+
+      .close {
+        display: none;
+      }
+
+      .p1 {
+        font-size: 18 * $pr;
+        line-height: 26 * $pr;
+      }
+
+      .p2 {
+        font-size: 13 * $pr;
+        line-height: 19 * $pr;
+        margin-top: 3 * $pr;
+      }
+
+      .list {
+        margin-top: 22 * $pr;
+        grid-template-columns: repeat(4, 68 * $pr);
+        grid-gap: 10 * $pr;
+
+        >a {
+          height: 68 * $pr;
+
+          &:nth-child(n + 6) {
+            display: flex;
+          }
+
+          &:nth-child(n + 9) {
+            display: none;
+          }
+        }
+      }
+
+      .href {
+        margin: 42 * $pr auto 0;
+        width: 246 * $pr;
+        height: 45 * $pr;
+        border-radius: 4 * $pr;
+
+        span {
+          font-size: 14 * $pr;
+        }
+      }
+    }
+  }
+}

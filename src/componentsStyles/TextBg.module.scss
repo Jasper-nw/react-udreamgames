@@ -1,0 +1,63 @@
+@use 'sass:math';
+
+.background {
+  position: relative;
+  border-radius: 7px;
+
+  &__main {
+    position: absolute;
+    border: 1px solid #000;
+    background: #2DE4FE;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: inherit;
+  }
+
+  &.yellow {
+    .background__main {
+      background: #FBD800;
+    }
+  }
+
+  &.green {
+    .background__main {
+      background: #7AC450;
+    }
+  }
+
+  &.pink {
+    .background__main {
+      background: #FF05B0;
+    }
+  }
+
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+
+  .background {
+    border-radius: 5 * $pr;
+
+    &__main {
+      border: 1 * $pr solid #000;
+    }
+
+    &::after {
+      top: 5 * $pr;
+      left: 5 * $pr;
+    }
+  }
+}

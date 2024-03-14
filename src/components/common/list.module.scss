@@ -1,0 +1,129 @@
+@use 'sass:math';
+
+.more {
+  height: 100%;
+  background: linear-gradient(180deg, #ffb150 0%, #eb7936 100%);
+  border: 1px solid #ffffff;
+  border-radius: 24px;
+  width: 100%;
+
+  &__info {
+    padding: 8px 13px 7px 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-gap: 10px;
+    grid-auto-flow: dense;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    &:deep(.normal) {
+      height: 120px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      grid-column-end: 4;
+      grid-row-end: 1;
+
+      a {
+        width: 112px;
+        height: 28px;
+        border: 1px solid #fff;
+        line-height: 28px;
+        text-align: center;
+
+        .more-span {
+          padding-right: 5px;
+          font-size: 16px;
+          font-family: AlibabaSans-Medium;
+        }
+
+        img {
+          // vertical-align: sub;
+        }
+
+        .img1 {
+          animation: move 0.6s linear infinite;
+        }
+
+        .img2 {
+          animation: move 0.6s linear infinite;
+        }
+
+        .img3 {
+          animation: move 0.6s linear infinite;
+        }
+      }
+
+      .title {
+        font-family: 'AlibabaSans-Heavy';
+        font-size: 18px;
+      }
+    }
+  }
+
+  @keyframes move {
+    0% {
+      -webkit-transform: translateX(-10px);
+      transform: translateX(-10px);
+    }
+
+    100% {
+      -webkit-transform: translateX(10px);
+      transform: translateX(10px);
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  $pr: math.div(1vw, 3.75);
+
+  .more {
+    border-radius: 0;
+
+    &__info {
+      padding: 10 * $pr;
+      grid-template-columns: repeat(2, 99 * $pr);
+      grid-gap: 9 * $pr;
+
+      &:deep(.normal) {
+        height: 99 * $pr;
+
+        &:nth-child(n + 4) {
+          display: none;
+        }
+      }
+
+      .info {
+        grid-column-end: 3;
+        grid-row-end: 1;
+
+        a {
+          width: 82 * $pr;
+          height: 20 * $pr;
+          border: 1 * $pr solid #fff;
+          line-height: 18 * $pr;
+
+          .more-span {
+            padding-right: 3 * $pr;
+            font-size: 12 * $pr;
+          }
+
+          img {
+            width: 9 * $pr;
+            height: 9 * $pr;
+            vertical-align: baseline;
+          }
+        }
+
+        .title {
+          font-size: 18 * $pr;
+        }
+      }
+    }
+  }
+}
